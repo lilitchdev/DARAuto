@@ -118,6 +118,7 @@ if __name__ == "__main__":
 
             tx_hash = approve(address, private_key)
             print("Аккаунт ", counter, " - апрувнул - ", tx_hash)
+            time.sleep(2)
             counter +=1
         time.sleep(30)
         counter = 1
@@ -129,6 +130,7 @@ if __name__ == "__main__":
 
             tx_hash = deposit(address, private_key)
             print("Аккаунт ", counter, " - депозит успешный - ", tx_hash)
+            time.sleep(2)
             counter +=1
         file.close()
         time.sleep(30)
@@ -138,8 +140,9 @@ if __name__ == "__main__":
             address = line.split(':')[0]
             private_key = line.split(':')[1].split("\n")[0]
             session.post(masterWalletUrl, json={"masterAddress": str(address)})
-            time.sleep(1)
-            print(session.get(f'https://k6qd41buh0.execute-api.us-east-1.amazonaws.com/prod/address/{str(address)}/status').text.split(',"lottery"')[0])
+            time.sleep(2)
+            print("Аккаунт - ", counter, " ", session.get(f'https://k6qd41buh0.execute-api.us-east-1.amazonaws.com/prod/address/{str(address)}/status').text.split(',"lottery"')[0])
+            counter +=1
         file.close()
     elif choice == '3':
         print("Введите кошелек, на который нужно перевести монеты")
@@ -155,6 +158,7 @@ if __name__ == "__main__":
 
             tx_hash = withdraw(address, private_key)
             print("Аккаунт ", counter, " - вывел токены", tx_hash)
+            time.sleep(2)
             counter +=1
         file.close()
         time.sleep(30)
@@ -166,6 +170,7 @@ if __name__ == "__main__":
 
             tx_hash = transferDAR(address, private_key, mainWallet)
             print("Аккаунт ", counter, " - перевел на мейн", tx_hash)
+            time.sleep(2)
             counter +=1
         file.close()
         time.sleep(30)
@@ -177,8 +182,8 @@ if __name__ == "__main__":
 
             tx_hash = transferBNB(address, private_key, mainWallet)
             print("Аккаунт ", counter, " - перевел бнб", tx_hash)
+            time.sleep(2)
             counter +=1
         file.close()
     else:
         print('Не то ввел, брат')
-
